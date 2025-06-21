@@ -1,0 +1,15 @@
+C:\Users\Felipe Benevides\Documents\Estudos\AmazonQ\MeuAgendamento360\src\myschedule360.Application\bin\Debug\net9.0\myschedule360.Application.deps.json
+c:\Users\Felipe Benevides\Documents\Estudos\AmazonQ\MeuAgendamento360\src\myschedule360.Application\bin\Debug\net9.0\myschedule360.Application.dll
+c:\Users\Felipe Benevides\Documents\Estudos\AmazonQ\MeuAgendamento360\src\myschedule360.Application\bin\Debug\net9.0\myschedule360.Application.pdb
+c:\Users\Felipe Benevides\Documents\Estudos\AmazonQ\MeuAgendamento360\src\myschedule360.Application\bin\Debug\net9.0\myschedule360.Domain.dll
+c:\Users\Felipe Benevides\Documents\Estudos\AmazonQ\MeuAgendamento360\src\myschedule360.Application\bin\Debug\net9.0\myschedule360.Domain.pdb
+c:\Users\Felipe Benevides\Documents\Estudos\AmazonQ\MeuAgendamento360\src\myschedule360.Application\obj\Debug\net9.0\myschedule360.Application.csproj.AssemblyReference.cache
+c:\Users\Felipe Benevides\Documents\Estudos\AmazonQ\MeuAgendamento360\src\myschedule360.Application\obj\Debug\net9.0\myschedule360.Application.GeneratedMSBuildEditorConfig.editorconfig
+c:\Users\Felipe Benevides\Documents\Estudos\AmazonQ\MeuAgendamento360\src\myschedule360.Application\obj\Debug\net9.0\myschedule360.Application.AssemblyInfoInputs.cache
+c:\Users\Felipe Benevides\Documents\Estudos\AmazonQ\MeuAgendamento360\src\myschedule360.Application\obj\Debug\net9.0\myschedule360.Application.AssemblyInfo.cs
+c:\Users\Felipe Benevides\Documents\Estudos\AmazonQ\MeuAgendamento360\src\myschedule360.Application\obj\Debug\net9.0\myschedule360.Application.csproj.CoreCompileInputs.cache
+C:\Users\Felipe Benevides\Documents\Estudos\AmazonQ\MeuAgendamento360\src\myschedule360.Application\obj\Debug\net9.0\myschedu.022C9953.Up2Date
+c:\Users\Felipe Benevides\Documents\Estudos\AmazonQ\MeuAgendamento360\src\myschedule360.Application\obj\Debug\net9.0\myschedule360.Application.dll
+c:\Users\Felipe Benevides\Documents\Estudos\AmazonQ\MeuAgendamento360\src\myschedule360.Application\obj\Debug\net9.0\refint\myschedule360.Application.dll
+c:\Users\Felipe Benevides\Documents\Estudos\AmazonQ\MeuAgendamento360\src\myschedule360.Application\obj\Debug\net9.0\myschedule360.Application.pdb
+C:\Users\Felipe Benevides\Documents\Estudos\AmazonQ\MeuAgendamento360\src\myschedule360.Application\obj\Debug\net9.0\ref\myschedule360.Application.dll

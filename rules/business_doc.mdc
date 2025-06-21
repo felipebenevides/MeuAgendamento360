@@ -1,0 +1,62 @@
+Documento de Requisitos de Produto (PRD): MVP meuagendamento360
+1. Introdução/Visão Geral
+meuagendamento360 é uma plataforma SaaS (Software as a Service) de gestão projetada para capacitar pequenas e médias empresas de serviços. O objetivo deste MVP é fornecer uma solução de gestão 360°, resolvendo os desafios diários de dois perfis de usuários principais: a empreendedora individual ("Sofia") e o dono de negócio com uma pequena equipe ("Bruno"). O produto busca oferecer um equilíbrio entre fornecer uma presença online profissional para atrair clientes e, ao mesmo tempo, simplificar e automatizar a gestão interna (agenda, finanças, equipe, estoque) para otimizar as operações e impulsionar o crescimento.
+2. Metas
+Presença Profissional: Fornecer a cada negócio uma landing page pública, limpa e gerada automaticamente para fortalecer sua imagem e descoberta online.
+Eficiência Operacional: Reduzir drasticamente o tempo gasto em tarefas administrativas manuais, como responder a mensagens de WhatsApp para agendamentos e calcular comissões.
+Tomada de Decisão: Capacitar os donos de negócios com um painel central que oferece relatórios claros sobre finanças, estoque e desempenho da equipe.
+Validação de Mercado: Validar a proposta de uma plataforma "tudo-em-um" que atende às necessidades essenciais de gestão de um espectro mais amplo do mercado de serviços, desde o freelancer até o pequeno salão/barbearia.
+3. Histórias de Usuário
+Para "Sofia" (Empreendedora Individual): "Como uma manicure autônoma, eu quero uma página online profissional e uma agenda digital simples para que eu possa parar de perder tempo respondendo mensagens no WhatsApp e meus clientes me percebam como um negócio sério."
+Para "Bruno" (Dono de Negócio): "Como dono de uma barbearia com 5 funcionários, eu quero um sistema onde eu possa gerenciar as agendas de todos, controlar o estoque de produtos, e ver o faturamento diário e as comissões da equipe sem precisar de planilhas, para que eu saiba se meu negócio é realmente lucrativo."
+Para ambos: "Como um profissional de serviços, ao adicionar um novo agendamento, eu quero poder registrar informações completas do meu cliente (nome, CPF, nascimento, telefone, endereço) para construir um histórico e oferecer um serviço mais personalizado."
+4. Requisitos Funcionais
+RF-01: Onboarding do Negócio
+O sistema deve ter um assistente de configuração guiado para que o usuário insira as informações do seu negócio (Nome, Endereço, Telefone, Horário de Funcionamento).
+RF-02: Landing Page Pública (/nomedaloja)
+O sistema deve gerar automaticamente uma página pública para o negócio.
+A página deve exibir: informações do negócio, lista de serviços com duração e preço, lista de profissionais e um botão de ação principal "Agendar via WhatsApp".
+O botão de WhatsApp deve direcionar para https://wa.me/ com o telefone do negócio.
+RF-03: Gestão de Serviços e Equipe (CRUD)
+O usuário deve poder Criar, Ler, Atualizar e Deletar serviços (com nome, descrição, duração, preço).
+O usuário deve poder Criar, Ler, Atualizar e Deletar membros da equipe.
+RF-04: Agenda/Calendário Central
+Deve haver uma interface de calendário visual para adicionar, ver, editar e deletar agendamentos manualmente.
+Ao adicionar um agendamento, o sistema deve permitir a captura dos seguintes dados do cliente: Nome, CPF, Data de Nascimento, Telefone e Endereço.
+RF-05: Painel Financeiro
+O sistema deve apresentar um painel com métricas chave como "Faturamento do Dia" e "Agendamentos de Hoje".
+Deve incluir relatórios de receita (diária, semanal, mensal) e um controle de fluxo de caixa (entradas e saídas).
+RF-06: Controle de Estoque
+O usuário deve poder gerenciar uma lista de produtos para venda e para uso profissional.
+O sistema deve permitir o ajuste de quantidade e emitir alertas de estoque baixo.
+RF-07: Gestão de Comissões
+O sistema deve permitir a configuração de regras de comissão e calcular automaticamente o valor devido a cada profissional com base nos serviços realizados.
+RF-08: Base de Clientes (CRM)
+O sistema deve salvar as informações de cada cliente que realiza um agendamento, criando um banco de dados com nome, informações de contato e histórico de serviços.
+5. Não-Objetivos (Fora do Escopo do MVP)
+Integração com Gateway de Pagamento: Não haverá processamento de pagamentos ou cobranças de sinal pela plataforma.
+Funcionalidades de Inteligência Artificial: Todas as funcionalidades descritas como Fase 3, como o assistente de agendamento por IA, marketing proativo e análise preditiva, estão fora do escopo.
+6. Considerações de Design
+A interface deve ser limpa, intuitiva e primariamente móvel (mobile-first).
+O design deve ser escalável para acomodar tanto a simplicidade necessária para "Sofia" quanto a densidade de informações que "Bruno" precisa em seu painel de gestão.
+Utilizar Tailwind CSS como framework base para agilizar o desenvolvimento do front-end em Next.js.
+7. Considerações Técnicas (Atualizado)
+Stack Sugerida: O backend será desenvolvido com .NET 9.0. O frontend será construído com o framework Next.js (que utiliza React).
+Banco de Dados: A recomendação é PostgreSQL, que é robusto e bem suportado pelo Entity Framework Core, o ORM a ser utilizado.
+Arquitetura e Boas Práticas: O desenvolvimento do backend deve seguir princípios modernos de engenharia de software para garantir um código de alta qualidade, manutenível e escalável.
+Padrão Repository com Interfaces: A camada de acesso a dados deve ser abstraída utilizando o Padrão Repository. Cada repositório deve implementar uma interface, permitindo que a lógica de negócios dependa de abstrações e não de implementações concretas de acesso a dados.
+Injeção de Dependência: O sistema de injeção de dependência nativo do .NET deve ser usado extensivamente para gerenciar o ciclo de vida dos serviços e repositórios, desacoplando os componentes da aplicação.
+Princípios SOLID: O código deve aderir aos cinco princípios SOLID:
+Single Responsibility Principle: Cada classe tem uma única responsabilidade.
+Open/Closed Principle: As entidades de software devem ser abertas para extensão, mas fechadas para modificação.
+Liskov Substitution Principle: Objetos de uma superclasse devem ser substituíveis por objetos de uma subclasse.
+Interface Segregation Principle: Interfaces específicas são melhores do que uma única interface de propósito geral.
+Dependency Inversion Principle: Depender de abstrações, não de implementações.
+Clean Code: A equipe deve se comprometer com as práticas de Clean Code, focando em nomes de variáveis e métodos significativos, funções pequenas e coesas, e a redução de complexidade de código.
+Schema do Banco de Dados: O schema deve ser projetado para suportar os requisitos expandidos, incluindo tabelas e relacionamentos para comissões, transações financeiras e estoque, além dos dados detalhados dos clientes.
+8. Métricas de Sucesso
+Atração: Atingir um número X de novos negócios cadastrados (considerando tanto perfis individuais quanto com equipes) nos primeiros 60 dias.
+Engajamento: Pelo menos Y% dos usuários com equipes devem utilizar ativamente uma das funcionalidades de gestão (Comissões, Estoque ou Financeiro) dentro dos primeiros 30 dias.
+Retenção: Pelo menos Z% dos usuários cadastrados devem continuar adicionando agendamentos na plataforma após 6 semanas.
+
+

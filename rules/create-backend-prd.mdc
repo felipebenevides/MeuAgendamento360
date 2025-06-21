@@ -1,0 +1,474 @@
+Prompt para Desenvolvimento Backend - myschedule360 SaaS Platform
+Contexto do Projeto
+Você é um Staff Senior Software Engineer responsável por arquitetar e implementar o backend completo da plataforma SaaS myschedule360. Esta é uma solução de gestão 360° para pequenas e médias empresas de serviços (salões, barbearias, clínicas estéticas, etc.) que visa empoderar empreendedores individuais ("Sofia") e proprietários de pequenos negócios ("Bruno") com uma presença online profissional e automação de gestão interna.
+Objetivos do Produto
+
+Presença Profissional: Fornecer página de destino pública automaticamente gerada para fortalecer imagem online
+Eficiência Operacional: Reduzir drasticamente tempo gasto em tarefas administrativas manuais
+Tomada de Decisão: Empoderar proprietários com dashboard central oferecendo relatórios claros
+Validação de Mercado: Validar proposta de plataforma "tudo-em-um" para mercado de serviços
+
+Stack Tecnológica Definida
+
+Backend: .NET 9.0
+Database: PostgreSQL com Entity Framework Core
+Documentação: Swagger/OpenAPI
+Testes: xUnit + Moq/NSubstitute
+Arquitetura: Clean Architecture com CQRS/Feature-based
+
+Requisitos de Arquitetura
+1. Estrutura de Camadas (Clean Architecture)
+src/
+├── myschedule360.Domain/           # Entidades, Value Objects, Interfaces
+├── myschedule360.Application/      # Use Cases, DTOs, Handlers
+├── myschedule360.Infrastructure/   # EF Core, Repositories, External Services
+├── myschedule360.API/             # Controllers, Middleware, Swagger
+└── tests/
+    ├── myschedule360.UnitTests/
+    ├── myschedule360.IntegrationTests/
+    └── myschedule360.ArchitectureTests/
+2. Padrões Obrigatórios
+
+SOLID Principles: Aplicar rigorosamente todos os 5 princípios
+Repository Pattern: Abstração de acesso a dados com interfaces
+CQRS: Separação de Commands/Queries
+Dependency Injection: Container nativo do .NET
+Clean Code: Nomenclatura clara, funções pequenas, baixa complexidade
+
+3. Organização por Features/Páginas
+Estruture o código por funcionalidades de negócio, não por tipos técnicos:
+Application/
+├── Features/
+│   ├── Authentication/
+│   ├── BusinessOnboarding/
+│   ├── PublicLandingPage/
+│   ├── ServiceManagement/
+│   ├── StaffManagement/
+│   ├── AppointmentScheduling/
+│   ├── CustomerDatabase/
+│   ├── FinancialDashboard/
+│   ├── InventoryControl/
+│   └── CommissionManagement/
+Especificação Completa das Features
+FR-01: Sistema de Autenticação Completo
+Página: Authentication & User Management
+User Stories:
+
+Como usuário, quero me registrar criando minha conta e negócio simultaneamente
+Como usuário, quero fazer login seguro com recuperação de senha
+Como proprietário, quero adicionar prestadores de serviço à minha equipe
+
+Commands:
+
+RegisterBusinessOwnerCommand: Registro completo (usuário + negócio)
+LoginUserCommand: Autenticação com JWT + refresh token
+RequestPasswordResetCommand: Solicitar redefinição de senha
+ResetPasswordCommand: Redefinir senha com token
+AddServiceProviderCommand: Adicionar prestador à equipe
+UpdateUserProfileCommand: Atualizar perfil
+DeactivateUserCommand: Desativar usuário
+
+Queries:
+
+GetUserProfileQuery: Perfil do usuário logado
+GetServiceProvidersQuery: Listar equipe do negócio
+ValidateResetTokenQuery: Validar token de reset
+
+Endpoints:
+
+POST /api/v1/auth/register - Registro completo
+POST /api/v1/auth/login - Login com JWT
+POST /api/v1/auth/refresh-token - Renovar token
+POST /api/v1/auth/request-password-reset - Solicitar reset
+POST /api/v1/auth/reset-password - Confirmar reset
+GET /api/v1/auth/profile - Perfil do usuário
+PUT /api/v1/auth/profile - Atualizar perfil
+
+FR-02: Business Onboarding
+Página: Business Setup Wizard
+User Story:
+
+Como novo usuário, quero um assistente de configuração guiado para inserir informações do meu negócio
+
+Commands:
+
+CreateBusinessCommand: Criar perfil do negócio
+UpdateBusinessInfoCommand: Atualizar informações
+SetOperatingHoursCommand: Definir horários de funcionamento
+GenerateBusinessSlugCommand: Criar slug único
+CompleteOnboardingCommand: Finalizar configuração inicial
+
+Queries:
+
+GetBusinessSetupStatusQuery: Status do onboarding
+ValidateBusinessSlugQuery: Validar disponibilidade do slug
+GetBusinessInfoQuery: Informações do negócio
+
+Endpoints:
+
+POST /api/v1/business/setup - Criar negócio
+PUT /api/v1/business/info - Atualizar informações
+PUT /api/v1/business/operating-hours - Horários de funcionamento
+GET /api/v1/business/setup-status - Status do setup
+POST /api/v1/business/validate-slug - Validar slug
+
+FR-03: Public Landing Page (/businessname)
+Página: Public Business Profile
+User Story:
+
+Como cliente, quero ver informações do negócio, serviços e poder agendar via WhatsApp
+
+Queries:
+
+GetPublicBusinessProfileQuery: Dados públicos completos
+GetPublicServicesQuery: Lista de serviços com preços
+GetPublicStaffQuery: Profissionais disponíveis
+GetBusinessOperatingHoursQuery: Horários de funcionamento
+
+Endpoints:
+
+GET /api/v1/public/business/{slug} - Perfil público completo
+GET /api/v1/public/business/{slug}/services - Serviços públicos
+GET /api/v1/public/business/{slug}/staff - Equipe pública
+
+FR-04: Service and Team Management (CRUD)
+Página: Services & Staff Management
+User Stories:
+
+Como proprietário, quero gerenciar meus serviços (nome, descrição, duração, preço)
+Como proprietário, quero gerenciar membros da minha equipe
+
+Commands - Services:
+
+CreateServiceCommand: Criar novo serviço
+UpdateServiceCommand: Atualizar serviço
+DeleteServiceCommand: Remover serviço
+ReorderServicesCommand: Reordenar lista
+AssignServiceToStaffCommand: Associar serviço a profissional
+
+Commands - Staff:
+
+AddStaffMemberCommand: Adicionar membro
+UpdateStaffMemberCommand: Atualizar informações
+DeactivateStaffMemberCommand: Desativar membro
+UpdateStaffAvailabilityCommand: Definir disponibilidade
+
+Queries:
+
+GetServicesQuery: Listar serviços com filtros
+GetServiceByIdQuery: Detalhes do serviço
+GetStaffMembersQuery: Listar equipe
+GetStaffAvailabilityQuery: Disponibilidade da equipe
+
+Endpoints:
+
+GET /api/v1/services - Listar serviços
+POST /api/v1/services - Criar serviço
+PUT /api/v1/services/{id} - Atualizar serviço
+DELETE /api/v1/services/{id} - Remover serviço
+GET /api/v1/staff - Listar equipe
+POST /api/v1/staff - Adicionar membro
+PUT /api/v1/staff/{id} - Atualizar membro
+
+FR-05: Central Calendar/Schedule
+Página: Calendar & Appointment Management
+User Stories:
+
+Como profissional, quero interface visual de calendário para gerenciar agendamentos
+Como profissional, quero capturar informações completas do cliente ao agendar
+
+Commands:
+
+CreateAppointmentCommand: Criar agendamento manual
+UpdateAppointmentCommand: Editar agendamento
+CancelAppointmentCommand: Cancelar agendamento
+RescheduleAppointmentCommand: Reagendar
+MarkAppointmentCompleteCommand: Marcar como concluído
+RecordNoShowCommand: Registrar não comparecimento
+
+Queries:
+
+GetAppointmentsQuery: Agendamentos por período/filtros
+GetAvailableTimeSlotsQuery: Horários disponíveis
+GetAppointmentDetailsQuery: Detalhes completos
+GetDailyScheduleQuery: Agenda do dia
+
+Endpoints:
+
+GET /api/v1/appointments - Listar agendamentos
+POST /api/v1/appointments - Criar agendamento
+PUT /api/v1/appointments/{id} - Atualizar agendamento
+DELETE /api/v1/appointments/{id} - Cancelar agendamento
+GET /api/v1/appointments/available-slots - Horários disponíveis
+
+FR-06: Financial Dashboard
+Página: Financial Reports & Analytics
+User Story:
+
+Como proprietário, quero dashboard com métricas-chave e relatórios financeiros
+
+Commands:
+
+RecordIncomeCommand: Registrar receita
+RecordExpenseCommand: Registrar despesa
+UpdateFinancialGoalsCommand: Definir metas
+
+Queries:
+
+GetDailyMetricsQuery: Métricas do dia
+GetRevenueReportQuery: Relatórios de receita
+GetCashFlowQuery: Controle de fluxo de caixa
+GetFinancialSummaryQuery: Resumo financeiro
+
+Endpoints:
+
+GET /api/v1/financial/daily-metrics - Métricas diárias
+GET /api/v1/financial/revenue-report - Relatório de receita
+GET /api/v1/financial/cash-flow - Fluxo de caixa
+POST /api/v1/financial/income - Registrar receita
+POST /api/v1/financial/expense - Registrar despesa
+
+FR-07: Inventory Control
+Página: Inventory Management
+User Story:
+
+Como proprietário, quero gerenciar produtos para uso profissional e venda
+
+Commands:
+
+AddProductCommand: Adicionar produto
+UpdateProductCommand: Atualizar produto
+AdjustStockCommand: Ajustar estoque
+RecordProductUsageCommand: Registrar uso
+SetLowStockAlertCommand: Configurar alerta
+
+Queries:
+
+GetInventoryQuery: Listar inventário
+GetLowStockItemsQuery: Itens com estoque baixo
+GetProductUsageReportQuery: Relatório de uso
+
+Endpoints:
+
+GET /api/v1/inventory/products - Listar produtos
+POST /api/v1/inventory/products - Adicionar produto
+PUT /api/v1/inventory/products/{id} - Atualizar produto
+POST /api/v1/inventory/stock-adjustment - Ajustar estoque
+GET /api/v1/inventory/low-stock - Estoque baixo
+
+FR-08: Commission Management
+Página: Commission Calculation & Reports
+User Story:
+
+Como proprietário, quero configurar regras de comissão e calcular automaticamente
+
+Commands:
+
+SetCommissionRuleCommand: Definir regra de comissão
+CalculateCommissionsCommand: Calcular comissões
+ProcessCommissionPaymentCommand: Processar pagamento
+
+Queries:
+
+GetCommissionRulesQuery: Regras de comissão
+GetCommissionReportQuery: Relatório de comissões
+GetStaffCommissionsQuery: Comissões por profissional
+
+Endpoints:
+
+GET /api/v1/commissions/rules - Regras de comissão
+POST /api/v1/commissions/rules - Criar regra
+GET /api/v1/commissions/report - Relatório
+POST /api/v1/commissions/calculate - Calcular comissões
+
+FR-09: Customer Database (CRM)
+Página: Customer Relationship Management
+User Stories:
+
+Como profissional, quero registrar informações completas do cliente
+Como profissional, quero ver histórico e oferecer serviço personalizado
+
+Commands:
+
+CreateCustomerCommand: Cadastrar cliente
+UpdateCustomerCommand: Atualizar dados
+MergeCustomerProfilesCommand: Unificar perfis
+AddCustomerNoteCommand: Adicionar observação
+
+Queries:
+
+GetCustomersQuery: Listar clientes
+GetCustomerDetailsQuery: Detalhes e histórico
+SearchCustomersQuery: Buscar clientes
+GetCustomerStatsQuery: Estatísticas do cliente
+
+Endpoints:
+
+GET /api/v1/customers - Listar clientes
+POST /api/v1/customers - Cadastrar cliente
+PUT /api/v1/customers/{id} - Atualizar cliente
+GET /api/v1/customers/{id} - Detalhes do cliente
+GET /api/v1/customers/search - Buscar clientes
+
+Especificação Técnica de Entrega
+1. Domain Models (Entity Framework)
+csharp// Principais entidades
+- User (BusinessOwner, ServiceProvider, roles)
+- Business (com slug único, operating hours)
+- Service (CRUD completo, pricing)
+- Staff (relacionamento com Users, availability)
+- Appointment (status enum, customer data)
+- Customer (CPF, complete profile, history)
+- FinancialTransaction (income/expense tracking)
+- InventoryItem (stock control, alerts)
+- CommissionRule (calculation rules)
+2. Database Schema
+
+Migrations estruturadas para versionamento
+Índices otimizados para queries frequentes
+Constraints de integridade referencial
+Soft deletes para auditoria
+Support para dados brasileiros (CPF, CEP, etc.)
+
+3. API Controllers por Feature
+Controllers/
+├── AuthController.cs
+├── BusinessController.cs
+├── PublicController.cs
+├── ServicesController.cs
+├── StaffController.cs
+├── AppointmentsController.cs
+├── CustomersController.cs
+├── FinancialController.cs
+├── InventoryController.cs
+└── CommissionsController.cs
+4. Swagger Documentation
+
+Documentação completa de todos os 40+ endpoints
+Schemas detalhados de request/response
+Exemplos práticos de uso
+Autenticação JWT configurada
+Versionamento API (v1)
+
+5. Testes Obrigatórios
+
+Unit Tests: Todos os handlers, services e domain logic
+Integration Tests: Endpoints críticos e fluxos completos
+Architecture Tests: Validar dependências entre camadas
+Coverage mínimo: 85%
+Testes de performance: < 200ms por endpoint
+
+6. Configurações Essenciais
+
+JWT Authentication com refresh token
+Rate limiting para proteção
+CORS configurado para frontend
+Logging estruturado (Serilog)
+Health checks para monitoramento
+Validation com FluentValidation
+Security headers implementados
+Compression habilitada
+
+Modelo de Dados Brasileiro
+csharp// Value Objects específicos do Brasil
+- CPF (validação e formatação)
+- CEP (integração com ViaCEP)
+- Phone (formato brasileiro)
+- Currency (Real brasileiro)
+Deliverables Esperados
+1. Estrutura Completa do Projeto
+
+✅ Clean Architecture implementada
+✅ 40+ endpoints funcionais
+✅ Sistema de autenticação JWT completo
+✅ 9 features principais implementadas
+
+2. Qualidade e Testes
+
+✅ Testes unitários (85%+ coverage)
+✅ Testes de integração
+✅ Architecture tests
+✅ Performance tests
+
+3. Documentação e Deploy
+
+✅ Swagger/OpenAPI completo
+✅ README detalhado
+✅ Dockerfile funcional
+✅ docker-compose para desenvolvimento
+
+4. Segurança e Performance
+
+✅ Autenticação robusta
+✅ Rate limiting implementado
+✅ Validações completas
+✅ Performance otimizada
+
+Critérios de Aceitação
+Funcional
+
+ Todas as 9 features (FR-01 a FR-09) implementadas
+ 40+ endpoints documentados e funcionais
+ Sistema de auth completo (registro, login, reset, roles)
+ CRUD completo para todas as entidades
+ Integração com dados brasileiros (CPF, CEP)
+
+Técnico
+
+ Clean Architecture com CQRS
+ Repository Pattern implementado
+ SOLID principles seguidos
+ Dependency Injection configurado
+ Entity Framework com migrations
+
+Qualidade
+
+ 85%+ test coverage
+ Zero warnings de build
+ Code analysis passando
+ Performance < 200ms
+ Security headers configurados
+
+Documentação
+
+ Swagger 100% completo
+ README com setup
+ Architecture documentation
+ API versioning implementado
+
+Próximos Passos Após Implementação
+
+Setup e Configuração
+
+Estrutura do projeto
+Configuração do EF Core
+Setup de testes
+
+
+Core Features 
+
+Authentication & User Management
+Business Onboarding
+Services & Staff Management
+
+
+Business Logic 
+
+Appointment Scheduling
+Customer Database (CRM)
+Public Landing Page
+
+
+Advanced Features 
+
+Financial Dashboard
+Inventory Control
+Commission Management
+
+
+Finalização 
+
+Testes completos
+Documentação
+Performance optimization
+Security review

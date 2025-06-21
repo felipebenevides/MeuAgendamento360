@@ -1,0 +1,12 @@
+c:\Users\Felipe Benevides\Documents\Estudos\AmazonQ\MeuAgendamento360\src\myschedule360.Domain\obj\Debug\net9.0\myschedule360.Domain.GeneratedMSBuildEditorConfig.editorconfig
+c:\Users\Felipe Benevides\Documents\Estudos\AmazonQ\MeuAgendamento360\src\myschedule360.Domain\obj\Debug\net9.0\myschedule360.Domain.AssemblyInfoInputs.cache
+c:\Users\Felipe Benevides\Documents\Estudos\AmazonQ\MeuAgendamento360\src\myschedule360.Domain\obj\Debug\net9.0\myschedule360.Domain.AssemblyInfo.cs
+c:\Users\Felipe Benevides\Documents\Estudos\AmazonQ\MeuAgendamento360\src\myschedule360.Domain\obj\Debug\net9.0\myschedule360.Domain.csproj.CoreCompileInputs.cache
+c:\Users\Felipe Benevides\Documents\Estudos\AmazonQ\MeuAgendamento360\src\myschedule360.Domain\bin\Debug\net9.0\myschedule360.Domain.deps.json
+c:\Users\Felipe Benevides\Documents\Estudos\AmazonQ\MeuAgendamento360\src\myschedule360.Domain\bin\Debug\net9.0\myschedule360.Domain.dll
+c:\Users\Felipe Benevides\Documents\Estudos\AmazonQ\MeuAgendamento360\src\myschedule360.Domain\bin\Debug\net9.0\myschedule360.Domain.pdb
+c:\Users\Felipe Benevides\Documents\Estudos\AmazonQ\MeuAgendamento360\src\myschedule360.Domain\obj\Debug\net9.0\myschedule360.Domain.dll
+c:\Users\Felipe Benevides\Documents\Estudos\AmazonQ\MeuAgendamento360\src\myschedule360.Domain\obj\Debug\net9.0\refint\myschedule360.Domain.dll
+c:\Users\Felipe Benevides\Documents\Estudos\AmazonQ\MeuAgendamento360\src\myschedule360.Domain\obj\Debug\net9.0\myschedule360.Domain.pdb
+c:\Users\Felipe Benevides\Documents\Estudos\AmazonQ\MeuAgendamento360\src\myschedule360.Domain\obj\Debug\net9.0\ref\myschedule360.Domain.dll
+c:\Users\Felipe Benevides\Documents\Estudos\AmazonQ\MeuAgendamento360\src\myschedule360.Domain\obj\Debug\net9.0\myschedule360.Domain.csproj.AssemblyReference.cache

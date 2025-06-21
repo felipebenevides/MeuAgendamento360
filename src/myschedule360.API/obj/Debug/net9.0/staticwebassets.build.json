@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "0AHAt6FPhn+ZJ6zpn3tFVCVQTAx5ApzmoRJwhqScyyc=",
+  "Source": "myschedule360.API",
+  "BasePath": "_content/myschedule360.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
