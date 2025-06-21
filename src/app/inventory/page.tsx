@@ -18,6 +18,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { DashboardLayout } from '@/components/layout/dashboard-layout'
 import { StatsCard } from '@/components/ui/stats-card'
 import { StatusBadge } from '@/components/ui/status-badge'
+import Link from 'next/link'
 
 export default function InventoryPage() {
   const [activeCategory, setActiveCategory] = useState('all')
@@ -127,10 +128,12 @@ export default function InventoryPage() {
             </Button>
           </div>
           
-          <Button>
-            <Plus className="w-4 h-4" />
-            Novo Produto
-          </Button>
+          <Link href="/inventory/create">
+            <Button>
+              <Plus className="w-4 h-4" />
+              Novo Produto
+            </Button>
+          </Link>
         </div>
 
         {/* Categories */}

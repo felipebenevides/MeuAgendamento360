@@ -16,11 +16,19 @@ import {
   ChevronLeft,
   ChevronRight
 } from 'lucide-react'
+import { LucideIcon } from 'lucide-react'
+
+interface NavigationItem {
+  name: string;
+  href: string;
+  icon: LucideIcon;
+  submenu?: { name: string; href: string }[];
+}
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { useState } from 'react'
 
-const navigation = [
+const navigation: NavigationItem[] = [
   { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
   { name: 'Agendamentos', href: '/appointments', icon: Calendar },
   { name: 'Clientes', href: '/customers', icon: Users },
@@ -29,7 +37,12 @@ const navigation = [
   { name: 'Financeiro', href: '/financial', icon: DollarSign },
   { name: 'Estoque', href: '/inventory', icon: Package },
   { name: 'Relatórios', href: '/reports', icon: BarChart3 },
-  { name: 'Configurações', href: '/settings', icon: Settings },
+  { name: 'Configurações', href: '/settings', icon: Settings,
+    submenu: [
+      { name: 'Notificações', href: '/settings/notifications' },
+      { name: 'Testar Notificações', href: '/settings/notifications/test' }
+    ]
+  },
 ]
 
 export function Sidebar() {
@@ -72,9 +85,11 @@ export function Sidebar() {
       <nav className="flex-1 p-4">
         <ul className="space-y-2">
           {navigation.map((item) => {
-            const isActive = pathname === item.href
+            const isActive = pathname === item.href || pathname.startsWith(item.href + '/')
+            const hasSubmenu = item.submenu && item.submenu.length > 0
+            
             return (
-              <li key={item.name}>
+              <li key={item.name} className="space-y-1">
                 <Link
                   href={item.href}
                   className={cn(
@@ -88,6 +103,29 @@ export function Sidebar() {
                   <item.icon className="w-5 h-5 flex-shrink-0" />
                   {!collapsed && <span>{item.name}</span>}
                 </Link>
+                
+                {!collapsed && hasSubmenu && isActive && (
+                  <ul className="pl-8 space-y-1">
+                    {item.submenu.map((subitem) => {
+                      const isSubActive = pathname === subitem.href
+                      return (
+                        <li key={subitem.name}>
+                          <Link
+                            href={subitem.href}
+                            className={cn(
+                              "flex items-center px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200",
+                              isSubActive
+                                ? "bg-primary/10 text-primary"
+                                : "text-gray-600 hover:text-gray-900 hover:bg-white/50"
+                            )}
+                          >
+                            <span>{subitem.name}</span>
+                          </Link>
+                        </li>
+                      )
+                    })}
+                  </ul>
+                )}
               </li>
             )
           })}

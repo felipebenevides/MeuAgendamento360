@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { DashboardLayout } from '@/components/layout/dashboard-layout'
+import Link from 'next/link'
 
 export default function CustomersPage() {
   const customers = [
@@ -89,10 +90,12 @@ export default function CustomersPage() {
             </Button>
           </div>
           
-          <Button>
-            <Plus className="w-4 h-4" />
-            Novo Cliente
-          </Button>
+          <Link href="/customers/create">
+            <Button>
+              <Plus className="w-4 h-4" />
+              Novo Cliente
+            </Button>
+          </Link>
         </div>
 
         {/* Stats Cards */}

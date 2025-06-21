@@ -36,9 +36,77 @@ export default function LoginPage() {
     resolver: zodResolver(loginSchema),
   })
 
+  // Usuários de demonstração para apresentação
+  const demoUsers = [
+    {
+      email: 'admin@meuagendamento360.com',
+      password: 'admin123',
+      role: 'Admin',
+      name: 'Administrador',
+    },
+    {
+      email: 'business@meuagendamento360.com',
+      password: 'business123',
+      role: 'BusinessOwner',
+      name: 'Dono do Negócio',
+    },
+    {
+      email: 'staff@meuagendamento360.com',
+      password: 'staff123',
+      role: 'Staff',
+      name: 'Funcionário',
+    },
+    {
+      email: 'customer@meuagendamento360.com',
+      password: 'customer123',
+      role: 'Customer',
+      name: 'Cliente',
+    },
+  ];
+
+  const loginWithDemoUser = (demoUser: typeof demoUsers[0]) => {
+    setIsLoading(true);
+    setTimeout(() => {
+      // Simular login bem-sucedido
+      const user = {
+        id: `demo-${demoUser.role.toLowerCase()}`,
+        email: demoUser.email,
+        firstName: demoUser.name.split(' ')[0],
+        lastName: demoUser.name.split(' ').slice(1).join(' '),
+        role: demoUser.role as any,
+        businessId: demoUser.role === 'BusinessOwner' ? 'demo-business-id' : undefined,
+      };
+
+      login('demo-token', 'demo-refresh-token', user);
+      toast({
+        title: "Login de demonstração realizado!",
+        description: `Bem-vindo, ${demoUser.name}!`,
+      });
+
+      // Redirecionar com base no papel do usuário
+      if (demoUser.role === 'BusinessOwner' && !user.businessId) {
+        router.push('/onboarding');
+      } else {
+        router.push('/dashboard');
+      }
+      setIsLoading(false);
+    }, 1000);
+  };
+
   const onSubmit = async (data: LoginForm) => {
     setIsLoading(true)
     try {
+      // Verificar se é um usuário de demonstração
+      const demoUser = demoUsers.find(
+        (user) => user.email === data.email && user.password === data.password
+      );
+
+      if (demoUser) {
+        loginWithDemoUser(demoUser);
+        return;
+      }
+
+      // Login real com a API
       const response = await api.post('/auth/login', data)
       const { token, refreshToken, userId, personId, businessId } = response.data
 
@@ -243,6 +311,25 @@ export default function LoginPage() {
                     Cadastre-se gratuitamente
                   </Link>
                 </p>
+              </div>
+              
+              {/* Demo Users */}
+              <div className="mt-6 border-t border-gray-200 pt-6">
+                <p className="text-sm font-medium text-gray-700 mb-3">Usuários para demonstração:</p>
+                <div className="grid grid-cols-2 gap-2">
+                  {demoUsers.map((demoUser) => (
+                    <button
+                      key={demoUser.email}
+                      type="button"
+                      onClick={() => loginWithDemoUser(demoUser)}
+                      className="text-xs py-2 px-3 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors flex flex-col items-center justify-center"
+                      disabled={isLoading}
+                    >
+                      <span className="font-medium">{demoUser.name}</span>
+                      <span className="text-gray-500 text-[10px]">{demoUser.email}</span>
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
             

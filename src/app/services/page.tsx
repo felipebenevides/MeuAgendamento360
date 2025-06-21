@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { DashboardLayout } from '@/components/layout/dashboard-layout'
+import Link from 'next/link'
 
 export default function ServicesPage() {
   const [activeCategory, setActiveCategory] = useState('all')
@@ -104,10 +105,12 @@ export default function ServicesPage() {
             </Button>
           </div>
           
-          <Button>
-            <Plus className="w-4 h-4" />
-            Novo Serviço
-          </Button>
+          <Link href="/services/create">
+            <Button>
+              <Plus className="w-4 h-4" />
+              Novo Serviço
+            </Button>
+          </Link>
         </div>
 
         {/* Categories */}

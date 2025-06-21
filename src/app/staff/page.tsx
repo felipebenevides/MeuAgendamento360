@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { DashboardLayout } from '@/components/layout/dashboard-layout'
+import Link from 'next/link'
 
 export default function StaffPage() {
   const staffMembers = [
@@ -91,10 +92,12 @@ export default function StaffPage() {
             </Button>
           </div>
           
-          <Button>
-            <Plus className="w-4 h-4" />
-            Novo Profissional
-          </Button>
+          <Link href="/staff/create">
+            <Button>
+              <Plus className="w-4 h-4" />
+              Novo Profissional
+            </Button>
+          </Link>
         </div>
 
         {/* Stats Cards */}

@@ -6,7 +6,7 @@ interface User {
   email: string
   firstName: string
   lastName: string
-  role: 'BusinessOwner' | 'ServiceProvider'
+  role: 'Admin' | 'BusinessOwner' | 'Staff' | 'Customer' | 'ServiceProvider'
   businessId?: string
 }
 
