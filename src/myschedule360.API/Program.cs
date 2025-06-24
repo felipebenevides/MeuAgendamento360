@@ -26,7 +26,8 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(mysch
 // Add services
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
-builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
+// builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
+builder.Services.AddScoped<IMultiStoreService, MultiStoreService>();
 
 // Add Memory Cache and Cache Service
 builder.Services.AddMemoryCache();
@@ -34,7 +35,7 @@ builder.Services.AddScoped<ICacheService, CacheService>();
 
 // Add SignalR
 builder.Services.AddSignalR();
-builder.Services.AddScoped<INotificationService, NotificationServiceImpl>();
+// builder.Services.AddScoped<INotificationService, NotificationServiceImpl>();
 
 // Add JWT Authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

@@ -18,6 +18,9 @@ public interface IApplicationDbContext
     DbSet<CommissionRule> CommissionRules { get; set; }
     DbSet<StaffAvailability> StaffAvailabilities { get; set; }
     DbSet<Notification> Notifications { get; set; }
+    DbSet<myschedule360.Domain.Entities.Task> Tasks { get; set; }
+    DbSet<Store> Stores { get; set; }
+    DbSet<Owner> Owners { get; set; }
     
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }

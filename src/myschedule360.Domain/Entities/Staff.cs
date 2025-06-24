@@ -5,7 +5,9 @@ public class Staff
     public Guid Id { get; set; }
     public Guid UserId { get; set; }
     public User User { get; set; } = null!;
+    public Guid StoreId { get; set; }
     public Guid BusinessId { get; set; }
+    public Store Store { get; set; } = null!;
     public Business Business { get; set; } = null!;
     public string Role { get; set; } = string.Empty;
     public decimal? CommissionRate { get; set; }

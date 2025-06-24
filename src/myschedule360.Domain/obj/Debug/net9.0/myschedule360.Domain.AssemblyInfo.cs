@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("myschedule360.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a8d164be0209e8d25997b6790ec217e9a06903ce")]
 [assembly: System.Reflection.AssemblyProductAttribute("myschedule360.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("myschedule360.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

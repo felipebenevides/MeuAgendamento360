@@ -14,7 +14,9 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     public DbSet<Person> Persons { get; set; }
     public DbSet<Address> Addresses { get; set; }
     public DbSet<User> Users { get; set; }
+    public DbSet<Owner> Owners { get; set; }
     public DbSet<Business> Businesses { get; set; }
+    public DbSet<Store> Stores { get; set; }
     public DbSet<Service> Services { get; set; }
     public DbSet<Staff> Staff { get; set; }
     public DbSet<Customer> Customers { get; set; }
@@ -24,6 +26,7 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     public DbSet<CommissionRule> CommissionRules { get; set; }
     public DbSet<StaffAvailability> StaffAvailabilities { get; set; }
     public DbSet<Notification> Notifications { get; set; }
+    public DbSet<myschedule360.Domain.Entities.Task> Tasks { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -83,12 +86,20 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
                   .WithOne(p => p.User)
                   .HasForeignKey<User>(e => e.PersonId);
                   
-            entity.HasOne(e => e.Business)
-                  .WithMany(b => b.Users)
-                  .HasForeignKey(e => e.BusinessId);
+            entity.HasOne(e => e.Store)
+                  .WithMany(s => s.Users)
+                  .HasForeignKey(e => e.StoreId);
         });
 
-        // Business configuration
+        // Owner configuration
+        modelBuilder.Entity<Owner>(entity =>
+        {
+            entity.HasOne(e => e.User)
+                  .WithOne(u => u.Owner)
+                  .HasForeignKey<Owner>(e => e.UserId);
+        });
+
+        // Business configuration (kept for backward compatibility)
         modelBuilder.Entity<Business>(entity =>
         {
             entity.Property(e => e.Name).IsRequired().HasMaxLength(200);
@@ -104,6 +115,26 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
                   .HasForeignKey(e => e.AddressId);
         });
 
+        // Store configuration
+        modelBuilder.Entity<Store>(entity =>
+        {
+            entity.Property(e => e.Name).IsRequired().HasMaxLength(200);
+            entity.Property(e => e.Slug).IsRequired().HasMaxLength(100);
+            entity.Property(e => e.CNPJ)
+                  .HasConversion(
+                      v => v != null ? v.Value : null,
+                      v => v != null ? new CNPJ(v) : null);
+            entity.HasIndex(e => e.Slug).IsUnique();
+                      
+            entity.HasOne(e => e.Address)
+                  .WithMany()
+                  .HasForeignKey(e => e.AddressId);
+                  
+            entity.HasOne(e => e.Owner)
+                  .WithMany(o => o.Stores)
+                  .HasForeignKey(e => e.OwnerId);
+        });
+
         // Customer configuration
         modelBuilder.Entity<Customer>(entity =>
         {
@@ -117,6 +148,10 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
         {
             entity.Property(e => e.Name).IsRequired().HasMaxLength(200);
             entity.Property(e => e.Price).HasPrecision(10, 2);
+            
+            entity.HasOne(e => e.Store)
+                  .WithMany(s => s.Services)
+                  .HasForeignKey(e => e.StoreId);
         });
 
         // Appointment configuration
@@ -134,6 +169,18 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
         {
             entity.Property(e => e.Amount).HasPrecision(10, 2);
             entity.Property(e => e.Description).IsRequired().HasMaxLength(500);
+            
+            entity.HasOne(e => e.Store)
+                  .WithMany(s => s.FinancialTransactions)
+                  .HasForeignKey(e => e.StoreId);
+        });
+
+        // Staff configuration
+        modelBuilder.Entity<Staff>(entity =>
+        {
+            entity.HasOne(e => e.Store)
+                  .WithMany(s => s.Staff)
+                  .HasForeignKey(e => e.StoreId);
         });
 
         // Commission Rule configuration
@@ -161,9 +208,9 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
             entity.Property(e => e.Name).IsRequired().HasMaxLength(200);
             entity.Property(e => e.Price).HasPrecision(10, 2);
             
-            entity.HasOne(e => e.Business)
-                  .WithMany()
-                  .HasForeignKey(e => e.BusinessId);
+            entity.HasOne(e => e.Store)
+                  .WithMany(s => s.InventoryItems)
+                  .HasForeignKey(e => e.StoreId);
         });
         
         // Notification configuration
@@ -174,8 +221,18 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
             entity.Property(e => e.Type).HasMaxLength(50);
             entity.Property(e => e.UserId).IsRequired();
         });
+        
+        // Task configuration
+        modelBuilder.Entity<myschedule360.Domain.Entities.Task>(entity =>
+        {
+            entity.Property(e => e.Title).IsRequired().HasMaxLength(200);
+            entity.Property(e => e.Description).HasMaxLength(1000);
+            entity.Property(e => e.CreatedBy).IsRequired().HasMaxLength(100);
+            entity.Property(e => e.AssignedTo).HasMaxLength(100);
+            
+            entity.HasOne(e => e.Business)
+                  .WithMany()
+                  .HasForeignKey(e => e.BusinessId);
+        });
     }
-    }
-
-
 }

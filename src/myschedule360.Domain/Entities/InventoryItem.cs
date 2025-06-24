@@ -8,7 +8,9 @@ public class InventoryItem
     public decimal Price { get; set; }
     public int Quantity { get; set; }
     public int MinimumStock { get; set; }
+    public Guid StoreId { get; set; }
     public Guid BusinessId { get; set; }
+    public Store Store { get; set; } = null!;
     public Business Business { get; set; } = null!;
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime? UpdatedAt { get; set; }

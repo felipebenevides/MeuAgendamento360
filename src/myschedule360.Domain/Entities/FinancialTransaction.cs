@@ -10,7 +10,9 @@ public class FinancialTransaction
     public DateTime TransactionDate { get; set; }
     public Guid? AppointmentId { get; set; }
     public Appointment? Appointment { get; set; }
+    public Guid StoreId { get; set; }
     public Guid BusinessId { get; set; }
+    public Store Store { get; set; } = null!;
     public Business Business { get; set; } = null!;
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 }

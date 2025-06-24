@@ -1,0 +1,263 @@
+🎨 MeuAgendamento360 - Design System Prompt
+📋 Visão Geral do Design System
+Você está criando uma aplicação de agendamento profissional chamada MeuAgendamento360 para múltiplos nichos (barbearias, salões de beleza, clínicas de massagem, etc.). O design deve ser neutro, profissional e elegante, adequado para qualquer tipo de estabelecimento de serviços.
+
+🎨 Paleta de Cores
+Cores Primárias
+
+Primary (Cinza-azulado profissional):
+- 50: '#f8fafc'   - Backgrounds sutis
+- 100: '#f1f5f9'  - Hover states leves
+- 200: '#e2e8f0'  - Borders
+- 300: '#cbd5e1'  - Disabled states
+- 400: '#94a3b8'  - Placeholders
+- 500: '#64748b'  - Texto secundário
+- 600: '#475569'  - Texto principal
+- 700: '#334155'  - Headers importantes
+- 800: '#1e293b'  - Títulos principais
+- 900: '#0f172a'  - Máximo contraste
+Cores Secundárias
+
+Secondary (Bege/Marrom sofisticado):
+- 50: '#fafaf9'   - Backgrounds alternados
+- 100: '#f5f5f4'  - Cards secundários
+- 200: '#e7e5e4'  - Separadores
+- 300: '#d6d3d1'  - Borders sutis
+- 400: '#a8a29e'  - Texto terciário
+- 500: '#78716c'  - Elementos decorativos
+- 600: '#57534e'  - Texto de apoio
+- 700: '#44403c'  - Elementos de destaque
+- 800: '#292524'  - Contraste médio
+- 900: '#1c1917'  - Máximo contraste
+Cores de Destaque
+
+Accent (Azul clássico):
+- 50: '#f0f9ff'   - Notificações positivas
+- 100: '#e0f2fe'  - Success backgrounds
+- 200: '#bae6fd'  - Informational
+- 300: '#7dd3fc'  - Interactive elements
+- 400: '#38bdf8'  - Hover states
+- 500: '#0ea5e9'  - Links e CTAs principais
+- 600: '#0284c7'  - Active states
+- 700: '#0369a1'  - Pressed states
+- 800: '#075985'  - High contrast
+- 900: '#0c4a6e'  - Maximum contrast
+Cores Funcionais
+
+Success: '#10b981' (Verde profissional)
+Warning: '#f59e0b' (Âmbar elegante)
+Error: '#ef4444' (Vermelho sutil)
+Info: '#3b82f6' (Azul informativo)
+📝 Tipografia
+Famílias de Fontes
+
+Font Display: 'Playfair Display', serif
+- Uso: Títulos principais, headers, branding
+- Características: Elegante, sofisticada, legível
+
+Font Body: 'Inter', sans-serif
+- Uso: Texto corrido, labels, navegação
+- Características: Moderna, limpa, alta legibilidade
+Hierarquia Tipográfica
+
+H1: text-4xl md:text-5xl lg:text-6xl font-display font-bold
+H2: text-3xl md:text-4xl font-display font-semibold
+H3: text-2xl md:text-3xl font-display font-semibold
+H4: text-xl md:text-2xl font-display font-medium
+H5: text-lg md:text-xl font-body font-semibold
+H6: text-base md:text-lg font-body font-semibold
+
+Body Large: text-lg font-body font-normal
+Body Regular: text-base font-body font-normal
+Body Small: text-sm font-body font-normal
+Caption: text-xs font-body font-medium
+🧩 Componentes de Layout
+Container System
+
+Container máximo: max-w-7xl mx-auto px-4 sm:px-6 lg:px-8
+Container médio: max-w-4xl mx-auto px-4 sm:px-6
+Container pequeno: max-w-2xl mx-auto px-4
+Grid System
+
+Grid principal: grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6
+Grid cards: grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4
+Grid dashboard: grid grid-cols-1 lg:grid-cols-4 gap-6
+Spacing Scale
+
+Espaçamento micro: gap-1 (4px)
+Espaçamento pequeno: gap-3 (12px)
+Espaçamento médio: gap-6 (24px)
+Espaçamento grande: gap-8 (32px)
+Espaçamento extra: gap-12 (48px)
+🎯 Padrões de Componentes
+Cards
+
+Card padrão:
+- bg-white rounded-xl shadow-sm border border-gray-100
+- p-6 hover:shadow-md transition-shadow
+
+Card destaque:
+- bg-gradient-to-br from-white to-gray-50
+- rounded-xl shadow-md border border-gray-200
+
+Card interativo:
+- hover:scale-[1.02] transition-transform duration-200
+- cursor-pointer
+Botões
+
+Primary: bg-primary-600 text-white hover:bg-primary-700 px-6 py-3 rounded-lg
+Secondary: bg-secondary-100 text-secondary-800 hover:bg-secondary-200
+Outline: border-2 border-primary-300 text-primary-600 hover:bg-primary-50
+Ghost: text-primary-600 hover:bg-primary-50
+Inputs
+
+Input padrão:
+- border border-gray-300 rounded-lg px-4 py-3
+- focus:ring-2 focus:ring-primary-500 focus:border-primary-500
+
+Input com erro:
+- border-red-300 focus:ring-red-500 focus:border-red-500
+
+Select customizado:
+- appearance-none bg-white border border-gray-300 rounded-lg
+🌊 Efeitos Visuais
+Glassmorphism
+
+.glass {
+  backdrop-blur-md bg-white/10 border border-white/20
+}
+Gradientes
+
+.gradient-bg {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 25%, #e2e8f0 50%, #f0f9ff 75%, #f8fafc 100%)
+}
+
+.text-gradient {
+  background: linear-gradient(to right, #475569, #0ea5e9, #334155)
+  background-clip: text
+  -webkit-background-clip: text
+  color: transparent
+}
+Sombras
+
+Sombra sutil: shadow-sm
+Sombra padrão: shadow-md
+Sombra elevada: shadow-lg
+Sombra intensa: shadow-xl
+🎭 Animações
+Transições Padrão
+
+Hover rápido: transition-colors duration-200
+Hover médio: transition-all duration-300
+Transformação: transition-transform duration-200
+Animações Customizadas
+
+Fade in: animate-fade-in (0.3s ease-out)
+Slide up: animate-slide-up (0.4s ease-out)
+Scale in: hover:scale-105 transition-transform
+📱 Responsividade
+Breakpoints
+
+sm: 640px   - Mobile landscape
+md: 768px   - Tablet portrait
+lg: 1024px  - Tablet landscape/Desktop
+xl: 1280px  - Desktop large
+2xl: 1536px - Desktop extra large
+Mobile-First Approach
+Sempre comece com design mobile
+Use classes responsivas: text-sm md:text-base lg:text-lg
+Navigation: Bottom tabs no mobile, sidebar no desktop
+Cards: Stack no mobile, grid no desktop
+🎨 Padrões de Interface
+Navigation
+
+Desktop Sidebar:
+- w-64 bg-white border-r border-gray-200
+- Logo no topo, menu items com ícones
+
+Mobile Bottom Nav:
+- fixed bottom-0 bg-white border-t border-gray-200
+- 4-5 ícones principais
+Dashboard Cards
+
+Stats Card:
+- Ícone colorido (w-12 h-12)
+- Título, valor principal, subtítulo
+- Trend indicator opcional
+- Background gradient sutil
+Forms
+
+Form Layout:
+- space-y-6 para campos
+- Labels acima dos inputs
+- Validation messages abaixo
+- Submit button com loading state
+Tables
+
+Table responsive:
+- Scroll horizontal no mobile
+- Zebra striping sutil
+- Hover states nas rows
+- Actions column à direita
+🔧 Estados Interativos
+Loading States
+
+Button loading: Spinner + "Carregando..."
+Page loading: Skeleton components
+Data loading: Shimmer effect
+Empty States
+
+Ilustração + Título + Descrição + CTA
+Ícone grande + Texto explicativo
+Error States
+
+Error boundary: Página de erro elegante
+Form errors: Texto vermelho + ícone
+API errors: Toast notification
+🎯 Diretrizes de UX
+Hierarquia Visual
+Primário: CTAs principais, status importantes
+Secundário: Navegação, ações secundárias
+Terciário: Metadata, informações de apoio
+Densidade de Informação
+Alta densidade: Tabelas, dashboards
+Média densidade: Forms, listas
+Baixa densidade: Landing pages, onboarding
+Feedback Visual
+Sucesso: Verde + ícone + toast
+Erro: Vermelho + ícone + descrição
+Info: Azul + ícone + tooltip
+Warning: Âmbar + ícone + modal
+🚀 Implementação
+CSS Classes Utilitárias
+
+/* Spacing */
+.section-padding { @apply py-16 md:py-24 }
+.container-padding { @apply px-4 sm:px-6 lg:px-8 }
+
+/* Typography */
+.heading-primary { @apply text-4xl md:text-5xl font-display font-bold text-gray-900 }
+.heading-secondary { @apply text-2xl md:text-3xl font-display font-semibold text-gray-800 }
+.body-text { @apply text-base text-gray-600 leading-relaxed }
+
+/* Components */
+.card-base { @apply bg-white rounded-xl shadow-sm border border-gray-100 }
+.button-primary { @apply bg-primary-600 text-white hover:bg-primary-700 px-6 py-3 rounded-lg transition-colors }
+.input-base { @apply border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary-500 }
+Component Structure
+
+// Sempre use esta estrutura para componentes
+interface ComponentProps {
+  // Props tipadas
+}
+
+export const Component: React.FC<ComponentProps> = ({ 
+  // Destructured props
+}) => {
+  return (
+    <div className="component-base-classes">
+      {/* JSX estruturado */}
+    </div>
+  );
+};
+Este design system garante consistência visual e excelente experiência do usuário em todos os nichos de negócio que a aplicação atenderá.
